@@ -59,21 +59,16 @@ mustang.moveCar(); // Increments mustang' move property by 10. Returns the new m
       invoking moveCar on the right object (prius vs mustang).
   */
   
-// function Car(make, model, year) {
-//     this.make: make,
-//     this.model: model,
-//     this.year: year,
-//     this.move = 0,
-//     this.moveCar = function () {
-//         return move += 10;
-//     }
-// }
+function Car(make, model, year) {
+    this.make = make,
+    this.model = model,
+    this.year = year,
+    this.move = 0,
+    this.moveCar = function () {
+        return this.move += 10;
+    }
+}
 
-
-// Car.prototype.moveCar = function() {
-//     let move = 0;
-//     this.move += 10;
-// }
 
   ////////// PROBLEM 4 //////////
   
@@ -92,27 +87,63 @@ mustang.moveCar(); // Increments mustang' move property by 10. Returns the new m
     this.rating = rating;
   }
   
-  // Code here
+  Movie.prototype.changeRating = function (num) {
+    const avrRating = this.rating + num / 2;
+    return this.rating = avrRating;
+  }
   
   ////////// PROBLEM 5 //////////
   
-  // Write a constructor function called User. This function should take in 4 parameters called name, age, email, and savedPosts in that order. Name and email will be strings, age will be a number and savedPosts will be an array of objects. These objects will each have 3 properties: id (a number), title (a string), and rating (a number between 1 and 5). These objects are the posts that the user will have saved to their account.
+  // Write a constructor function called User.
+// This function should take in 4 parameters called name, age, email, and savedPosts in that order.
+// Name and email will be strings, age will be a number and savedPosts will be an array of objects.
+// These objects will each have 3 properties: id (a number), title (a string), and rating (a number between 1 and 5).
+// These objects are the posts that the user will have saved to their account.
   
-  // Once the User constructor function is created, write a prototype method for the User function. Name this method addSavedPost. It should take in three parameters: id (a number), title (a string) and rating (a number). Use these parameters to create a new object and add it to the savedPosts array. Make sure to name the properties the same as described previously (id, title, rating).
+  // Once the User constructor function is created,
+// write a prototype method for the User function. Name this method addSavedPost.
+// It should take in three parameters: id (a number), title (a string) and rating (a number).
+// Use these parameters to create a new object and add it to the savedPosts array.
+// Make sure to name the properties the same as described previously (id, title, rating).
   
-  // Code here
-  
+  function User(name, age, email, savedPosts) {
+    this.name = name;
+    this.age = age;
+    this.email = email;
+    this.savedPosts = savedPosts; // ARRAY!
+  }
+
+  User.prototype.addSavedPosts = function (id, title, rating) {
+      this.savedPosts.push({id, title, rating});
+}
+
   ////////// PROBLEM 6 //////////
   
   // You will be using the constructor function you just created in problem 5.
-  // Write a prototype method for the User constructor function named removeSavedPost that will take in one number parameter representing the post id. Use this id to find and remove the matching object in the savedPosts array.
+  // Write a prototype method for the User constructor function named removeSavedPost that
+// will take in one number parameter representing the post id.
+// Use this id to find and remove the matching object in the savedPosts array.
   
-  // Code here
+  User.prototype.removeSavedPost = function (num) {
+    const index = this.savedPosts.findIndex(obj => obj === num);
+    this.savedPosts.splice(index, 1);
+  }
   
   ////////// PROBLEM 7 //////////
   
   // You will continue to use the constructor function you created in problem 5.
-  // Write a prototype method for the User constructor function named changePostRating that will take in two number parameters. The first will be an id (a number) and the second will be the new rating (a number). Use the id to find the matching object in the savedPosts array. Once you find the matching object, update it's rating score with the new rating parameter.
-  
-  // Code here
+  // Write a prototype method for the User constructor function named changePostRating
+// that will take in two number parameters.
+// The first will be an id (a number) and the second will be the new rating (a number).
+// Use the id to find the matching object in the savedPosts array.
+// Once you find the matching object, update it's rating score with the new rating parameter.
+
+// savedPosts = [{id, title, rating}, {id, title, rating}]
+  User.prototype.changePostRating = function (id, rating) {
+    for (let i = 0; i < this.savedPosts.length; i++) {
+        if (id === this.savedPosts[i].id) {
+            this.savedPosts[i].rating = rating;
+        }
+    }
+  }
   
