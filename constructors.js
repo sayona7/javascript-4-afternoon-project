@@ -113,7 +113,7 @@ function Car(make, model, year) {
     this.savedPosts = savedPosts; // ARRAY!
   }
 
-  User.prototype.addSavedPosts = function (id, title, rating) {
+  User.prototype.addSavedPost = function (id, title, rating) {
       this.savedPosts.push({id, title, rating});
 }
 
